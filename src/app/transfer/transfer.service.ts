@@ -23,4 +23,11 @@ export class TransferService {
     return this.http.get<Transfer[]>(`${this.baseUrl}/api/transfers`);
   }
 
+  createTransfer(data: Transfer): Observable<any> {
+    const payload = {
+      ...data,
+      transferDate: new Date(data.transferDate).toISOString()
+    };
+    return this.http.post<Transfer>(`${this.baseUrl}/api/transfers`, payload, { observe: 'response' });
+  }
 }

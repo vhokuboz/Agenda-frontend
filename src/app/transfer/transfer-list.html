@@ -4,7 +4,7 @@
       Lista de transferências
       <i class="icon-list"></i>
     </h1>
-    
+    <button (click)="openModal()">Adicionar Nova Transferência <i class="icon-plus"></i></button>
   </div>
   @if (transfers.length === 0) {
   <p class="no-tranfers-text">Ainda não existem transferências agendadas.</p>
@@ -35,5 +35,42 @@
     </tbody>
   </table>
 
-
+  @if (showModal) {
+  <div class="modal">
+    <div class="modal-content">
+      <h2>Nova Transferência</h2>
+      <form (ngSubmit)="submitTransfer()">
+        <div class="form-group">
+          <label>Conta Origem:</label>
+          <input [(ngModel)]="newTransfer.sourceAccount" name="sourceAccount" required />
+        </div>
+        <div class="form-group">
+          <label>Conta Destino:</label>
+          <input [(ngModel)]="newTransfer.destinationAccount" name="destinationAccount" required />
+        </div>
+        <div class="form-group">
+          <label>Valor:</label>
+          <input type="number" [(ngModel)]="newTransfer.amount" name="amount" required />
+        </div>
+        <div class="form-group">
+          <label>Data da Transferência:</label>
+          <input type="date" [(ngModel)]="newTransfer.transferDate" name="transferDate" required />
+        </div>
+        <div class="form-group form-footer">
+          <button type="button" (click)="closeModal()">Cancelar <i class="icon-close"></i></button>
+          <button type="submit">Salvar <i class="icon-check"></i></button>
+        </div>
+      </form>
+      @if (errorMsg.length > 0) {
+      <div class="error">
+        <ul>
+          @for (message of errorMsg; track $index) {
+          <li>{{ message }}</li>
+          }
+        </ul>
+      </div>
+      }
+    </div>
+  </div>
+  }
 </div>
