@@ -16,11 +16,11 @@ export interface Transfer {
   providedIn: 'root'
 })
 export class TransferService {
-  readonly baseUrl = 'http://localhost:8080' 
+  readonly baseUrl = 'http://localhost:8080'
   private http = inject(HttpClient);
 
-  loadTransfers(): Observable<Transfer[]> {
-    return this.http.get<Transfer[]>(`${this.baseUrl}/api/transfers`);
+  loadTransfers(page: number): Observable<any> {
+    return this.http.get<any>(`${this.baseUrl}/api/transfers?page=${page}`);
   }
 
   createTransfer(data: Transfer): Observable<any> {

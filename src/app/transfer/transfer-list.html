@@ -8,7 +8,7 @@
   </div>
   @if (transfers.length === 0) {
   <p class="no-tranfers-text">Ainda não existem transferências agendadas.</p>
-  }
+  } @else {
 
   <table class="transfer-table">
     <thead>
@@ -34,6 +34,13 @@
       }
     </tbody>
   </table>
+
+  <div class="pagination">
+    <button (click)="goToPage(page - 1)" [disabled]="page === 1">Anterior</button>
+    <span>Página {{page}} de {{totalPages}}</span>
+    <button (click)="goToPage(page + 1)" [disabled]="page === totalPages">Próxima</button>
+  </div>
+  }
 
   @if (showModal) {
   <div class="modal">

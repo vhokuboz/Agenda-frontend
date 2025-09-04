@@ -14,6 +14,9 @@ export class TransferListComponent implements OnInit {
   private transferService = inject(TransferService);
 
   transfers: Transfer[] = [];
+  page = 1;
+  pageSize = 10;
+  totalPages = 1;
   showModal = false;
   errorMsg: string[] = [];
   newTransfer: Transfer = {
@@ -24,7 +27,7 @@ export class TransferListComponent implements OnInit {
   };
 
   ngOnInit() {
-    this.loadTransfers();
+    this.loadTransfers(this.page);
   }
 
   openModal() {
@@ -43,13 +46,13 @@ export class TransferListComponent implements OnInit {
   }
 
   submitTransfer() {
-    this.errorMsg.splice(0, this.errorMsg.length)
+    this.errorMsg.splice(0, this.errorMsg.length);
     this.transferService.createTransfer(this.newTransfer)
       .subscribe({
         next: (resp) => {
           if (resp.status === 201) {
             this.closeModal();
-            this.loadTransfers();
+            this.loadTransfers(this.page);
           }
         },
         error: (err) => {
@@ -59,10 +62,20 @@ export class TransferListComponent implements OnInit {
       });
   }
 
-  private loadTransfers(): void {
-    this.transferService.loadTransfers().subscribe({
+  goToPage(pageNumber: number): void {
+    if (pageNumber >= 1 && pageNumber <= this.totalPages) {
+      this.page = pageNumber;
+      this.loadTransfers(this.page);
+    }
+  }
+
+  private loadTransfers(page: number): void {
+    this.transferService.loadTransfers(page).subscribe({
       next: ((transfers => {
-        this.transfers = transfers;
+        if (transfers.content.length) {
+          this.transfers = transfers.content;
+          this.totalPages = transfers.totalPages;
+        }
       }))
     });
   }
