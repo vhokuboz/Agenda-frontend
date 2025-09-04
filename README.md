@@ -1,59 +1,49 @@
-# Frontend
+# Agenda Bank frontend
+Esta aplicação é um frontend para gestão de transferências bancárias, permitindo ao usuário visualizar, cadastrar e acompanhar transações entre contas. A interface apresenta uma listagem paginada das transferências, integração com backend via API REST, e modal para cadastro de novas operações, com validação e feedback de erros.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.2.2.
+## Decisões Arquiteturais
 
-## Development server
+- **Angular Standalone Components**: Utilização de componentes standalone para modularidade e simplicidade, aproveitando recursos do Angular 16+.
+- **Signals**: Uso de signals para gerenciamento reativo de estado, garantindo melhor performance e integração com o Angular moderno.
+- **Serviço de Transferências**: Separação da lógica de comunicação com a API em um serviço dedicado (TransferService), facilitando manutenção e testes.
+- **Estilização**: CSS modular por componente, fonte global Inter, e tabela responsiva com paginação.
+- **Modal**: Implementação de modal para cadastro de transferências, com feedback de erro dinâmico.
 
-To start a local development server, run:
+## Versões Utilizadas
+- **Node.js**: 18+
+- **Angular**: 20.x
+- **TypeScript**: 5.x
 
+## Ferramentas e Bibliotecas
+- Angular CLI
+- RxJS
+- Zone.js
+- Google Fonts - Inter
+
+### Instruções para Subida do Projeto
+1. Instale as dependências:
+    ```bash
+    npm install
+    ```
+
+2. Inicie o servidor de desenvolvimento:
+    ```bash
+    npm start
+    ```
+    O frontend estará disponível em `http://localhost:4200`.
+
+3. API Backend:
+    - Certifique-se que a API de transferências está rodando em `http://localhost/api/transfers`.
+    - O frontend consome os endpoints GET e POST conforme especificado.
+
+## Estrutura Principal
+- `src/app/transfer/transfer-list.*` - Tela principal, listagem, modal e paginação
+- [transfer.service.ts](/src/app/transfer/transfer.service.ts) - Serviço de integração com API
+- [styles.css](/src/styles.css) - Estilos globais
+- [index.html](/src/index.html) - Fonte Inter e configurações globais
+
+## Observações
+- O projeto utiliza Angular Signals, recomendando Angular 16+.
 ```bash
-ng serve
+npm install -g @angular/cli
 ```
-
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
-
-## Code scaffolding
-
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
-
-```bash
-ng generate component component-name
-```
-
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
-
-```bash
-ng generate --help
-```
-
-## Building
-
-To build the project run:
-
-```bash
-ng build
-```
-
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
-
-## Running unit tests
-
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
-
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
