@@ -1,0 +1,39 @@
+<div class="container">
+  <div class="header-content">
+    <h1>
+      Lista de transferências
+      <i class="icon-list"></i>
+    </h1>
+    
+  </div>
+  @if (transfers.length === 0) {
+  <p class="no-tranfers-text">Ainda não existem transferências agendadas.</p>
+  }
+
+  <table class="transfer-table">
+    <thead>
+      <tr>
+        <th>Conta origem</th>
+        <th>Conta destino</th>
+        <th>Valor</th>
+        <th>Taxa</th>
+        <th>Data do agendamento</th>
+        <th>Data da transação</th>
+      </tr>
+    </thead>
+    <tbody>
+      @for (transfer of transfers; track $index) {
+      <tr>
+        <td>{{transfer.sourceAccount}}</td>
+        <td>{{transfer.destinationAccount}}</td>
+        <td>{{transfer.amount}}</td>
+        <td>{{transfer.fee}}%</td>
+        <td>{{transfer.transferDate | date:'short'}}</td>
+        <td>{{transfer.schedulingDate | date:'short'}}</td>
+      </tr>
+      }
+    </tbody>
+  </table>
+
+
+</div>

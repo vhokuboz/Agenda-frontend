@@ -1,0 +1,45 @@
+
+
+.container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 20px;
+    background: #fff;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.transfer-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 24px;
+    font-size: 1rem;
+}
+
+.transfer-table th,
+.transfer-table td {
+    padding: 12px 16px;
+    text-align: left;
+}
+
+.transfer-table th {
+    background: #f5f6fa;
+    font-weight: 500;
+    border-bottom: 2px solid #e0e0e0;
+}
+
+.transfer-table tr {
+    transition: background 0.2s;
+}
+
+.transfer-table tr:nth-child(even) {
+    background: #fafbfc;
+}
+
+.transfer-table tr:hover {
+    background: #e3f2fd;
+}
+
+.transfer-table td {
+    border-bottom: 1px solid #e0e0e0;
+}
